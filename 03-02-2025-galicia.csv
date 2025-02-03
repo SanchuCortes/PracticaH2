@@ -1,0 +1,8 @@
+IDConcello,NombreConcello,Fecha,TemperaturaMaxima,TemperaturaMinima,VientoManha,VientoNoite,VientoTarde,PrecipitacionManha,PrecipitacionNoite,PrecipitacionTarde,CeoManha,CeoNoite,CeoTarde,UVMax
+15030,A Coruña,2025-02-03T00:00:00,14,8,304,300,301,5,5,5,101,201,103,2
+32054,Ourense,2025-02-03T00:00:00,16,2,299,299,299,5,5,5,115,201,101,2
+36057,Vigo,2025-02-03T00:00:00,15,5,299,304,300,5,5,5,101,202,101,2
+15036,Ferrol,2025-02-03T00:00:00,15,5,299,299,301,5,5,5,103,201,103,2
+36038,Pontevedra,2025-02-03T00:00:00,16,4,299,299,307,5,5,5,101,202,101,2
+27028,Lugo,2025-02-03T00:00:00,14,3,299,299,299,5,5,5,115,215,101,2
+15078,Santiago de Compostela,2025-02-03T00:00:00,13,3,302,299,306,5,5,5,101,202,101,2

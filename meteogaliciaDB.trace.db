@@ -1,0 +1,27 @@
+2025-02-03 17:46:42.843096+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Imposible interpretar la constante "DATE" "2025-02-03T00:00:00"
+Cannot parse "DATE" constant "2025-02-03T00:00:00"; SQL statement:
+INSERT INTO predicciones (idConcello, nombre, fecha, tMax, tMin, vientoManha, vientoTarde, vientoNoite, precipitacionManha, precipitacionTarde, precipitacionNoite, uvMax) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1875)
+	at org.h2.value.Value.convertTo(Value.java:1168)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1113)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:936)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:256)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:216)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:174)
+	at com.example.prueba.MeteoDAO.insertarPrediccion(MeteoDAO.java:32)
+	at com.example.prueba.Main.main(Main.java:24)
+Caused by: java.lang.NumberFormatException: 03T00:00:00
+	at org.h2.util.StringUtils.parseUInt31(StringUtils.java:1116)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:192)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 14 more
