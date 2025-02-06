@@ -1,12 +1,15 @@
 package com.example.prueba;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MeteoDAO {
-
     public void insertarPrediccion(int idConcello, String nombre, String fechaISO, int tMax, int tMin,
                                    int vientoManha, int vientoTarde, int vientoNoite,
-                                   int precipManha, int precipTarde, int precipNoite, int uvMax){
+                                   int precipManha, int precipTarde, int precipNoite, int uvMax) {
         String sql = "INSERT INTO predicciones (idConcello, nombre, fecha, tMax, tMin, " +
                 "vientoManha, vientoTarde, vientoNoite, precipitacionManha, precipitacionTarde, precipitacionNoite, uvMax) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -14,13 +17,12 @@ public class MeteoDAO {
         try (Connection conn = ControladorDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // Convertir la fecha de "2025-02-03T00:00:00" a "2025-02-03"
-            String fechaFormateada = fechaISO.split("T")[0];  // Extrae solo la parte "yyyy-MM-dd"
-            Date fechaSQL = Date.valueOf(fechaFormateada); // Convierte a java.sql.Date
+            String fechaFormateada = fechaISO.split("T")[0];
+            Date fechaSQL = Date.valueOf(fechaFormateada);
 
             pstmt.setInt(1, idConcello);
             pstmt.setString(2, nombre);
-            pstmt.setDate(3, fechaSQL);  // Usamos setDate en lugar de setString
+            pstmt.setDate(3, fechaSQL);
             pstmt.setInt(4, tMax);
             pstmt.setInt(5, tMin);
             pstmt.setInt(6, vientoManha);
@@ -32,18 +34,19 @@ public class MeteoDAO {
             pstmt.setInt(12, uvMax);
 
             pstmt.executeUpdate();
-            System.out.println("Datos insertados correctamente.");
+            System.out.println(" Datos insertados correctamente en MySQL.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void listarPredicciones(){
+    public void listarPredicciones() {
         String sql = "SELECT * FROM predicciones";
 
-        try(Connection conn = ControladorDB.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery()){
+        try (Connection conn = ControladorDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
             while (rs.next()) {
                 System.out.println("ID: " + rs.getInt("id") +
                         ", Concello: " + rs.getString("nombre") +
@@ -51,11 +54,8 @@ public class MeteoDAO {
                         ", Temp Max: " + rs.getInt("tMax") +
                         ", Temp Min: " + rs.getInt("tMin"));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }
